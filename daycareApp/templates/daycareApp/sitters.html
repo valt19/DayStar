@@ -1,0 +1,64 @@
+{% extends "daycareApp/base.html" %}
+{% load static %}
+{% block content %}
+
+
+<div class="container">
+    <main class="main" id="main">
+        <div class="container">
+            <a href="/sitter-reg/"><button class="btn btn-outline-info btn-lg"><span><i class="bi bi-plus"></i></span>Add Sitter <span></span></button></a>
+            <a href="/allonduty/"><button class="btn btn-outline-info btn-lg"><span><i class="bi bi-plus"></i></span>On duty <span></span></button></a>
+
+          <div class="col-lg-12 col-md-12 sitter-table mt-3 p-3">
+            <!-- Table with stripped rows -->
+            <table id="dataTable" class="table table-stripped">
+              <caption class="caption-top text-center"><h4>Available Baby Sitters</h4></caption>
+              <thead>
+                <tr>
+                  <th>
+                    <b>N</b>ames
+                  </th>
+                  <th>NIN</th>
+                  <th>Location</th>
+                  <th data-type="tel">Contact</th>
+                  <th>Education Level</th>
+                  <th>More</th>
+                  <th>
+                    <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <span><i class="bi bi-three-dots"></i></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="/sitter/"><span><i class="bi bi-person-plus"></i></span>Add Sitter</a></li>
+                      <li><a class="dropdown-item" href="#"><span><i class="bi bi-info"></i></span>View Details</a></li>
+                      <li><a class="dropdown-item" href="#"><span><i class="bi bi-sliders"></i></span>Others</a></li>
+                    </ul>
+                  </div></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for each in all_sitters %}
+                  <tr>
+                      <td>{{ each.name }}</td>
+                      <td>{{ each.NIN }}</td>
+                      <td>{{ each.location }}</td>
+                      <td>{{ each.contact }}</td>
+                      <td>{{ each.education_Level }}</td>
+                      <td>
+                        <a href="/details/{{ each.id }}" class="text-blue-500"> Details </a>
+                      </td>
+                      <td>
+                        <a href="/editsitters/{{ each.id }}" class="text-blue-500 text-center"> Edit </a>
+                      </td>
+                      {% comment %} <td><span><i class="bi bi-eye-slash"></i></span></td>  {% endcomment %}
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </main>
+      
+    </main>
+</div>
+
+{% endblock %}

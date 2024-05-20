@@ -1,0 +1,50 @@
+{% extends 'daycareApp/base.html' %} {% load crispy_forms_tags %} {% load static %}
+
+
+{% block content %}
+<main class="main" id="main">
+  <div class="container">
+  
+    <!--  table -->
+    <a href="{% url 'babyadd' %}" class="btn btn-sm m-1 text-white" style="background-color: #1e7875; border: none;">Add Payment</a>
+     <div class="col-lg-12 col-md-12 sitter-table mt-3 p-2">
+      <table class="table table-bordered table-stripped mt-3">
+        <caption class="caption-top text-center" style="color: #a74527;"><h4>Baby Payments
+        </h4></caption>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Baby Name</th>
+            <th scope="col">Period of Stay</th>
+            <th scope="col">Fee</th>
+            <th scope="col">Date of Payment</th>
+            <th scope="col">Duration of payment</th>
+            <th scope="col">Amount Paid</th>
+            <th scope="col">Balance</th>
+            <th scope="col">Action</th>
+
+          </tr>
+        </thead>
+       
+        <tbody>
+          {% for baby in baby %}
+            <tr>
+              <th scope="row">{{ baby.id }}</th>
+              <td>{{ baby.baby }}</td>
+              <td>{{ baby.period_of_stay }}</td>
+              <td>UGX {{ baby.amount }}</td>
+              <td>{{ baby.date_of_payment }}</td>
+              <td>{{ baby.duration_of_pay }}</td>
+              <td>UGX {{ baby.amount_paid }}</td>
+              <td>UGX {{ baby.change }}</td>
+              <td><a href="{% url 'babyedit' id=baby.id %}" class="btn btn-sm m-1 text-white" style="background-color: #1e7875; border: none;">Edit</a>
+                
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table> 
+    </div>
+  </div>
+</main>
+
+{% endblock content %}

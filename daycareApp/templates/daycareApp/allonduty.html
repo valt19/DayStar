@@ -1,0 +1,47 @@
+{% extends 'daycareApp/base.html' %} {% load crispy_forms_tags %} {% load static %}
+
+
+{% block content %}
+<main class="main" id="main">
+  <div class="container">
+    <!-- item table -->
+    
+    <a class="btn text-light" href="/onduty" style="background-color: #1e7875; border: none;">Register</a>
+     <div class="col-lg-12 col-md-12 sitter-table mt-3 p-2">
+      <table class="table table-bordered table-stripped mt-3">
+        <caption class="caption-top text-center"><h4>Sitters on Duty
+        </h4></caption>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for duty in duty %}
+            <tr>
+              <th scope="row">{{ duty.id }}</th>
+              <td>{{ duty.sitter_name }}</td>
+              <td>{{ duty.date }}</td>
+              <td>
+                {% if duty.status == False %}
+                    <span class="badge" style="background-color: #a74527;">Off</span>
+                {% elif duty.status == True %}
+                    <span class="badge" style="background-color: #2e53fc;">On</span>
+                    {% else %}
+                   
+                {% endif %}
+            </td>
+              <td><a href="{% url 'editOnduty' id=duty.id %}">Edit</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table> 
+    </div>
+  </div>
+</main>
+
+{% endblock content %}

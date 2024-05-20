@@ -1,0 +1,124 @@
+{% extends 'daycareApp/base.html' %} {% load static %}
+
+
+{% block content %}
+  <main class="main" id="main">
+    <div class="container">
+      <div class="row">
+        <div class="sitter col-md-2 d-md-block ml-5 mb-3">
+          <h2 class="text-center">{{ count_babys }}</h2>
+          <p>
+            <span><i class="bi bi-person total-icon"></i></span
+            ><strong>Registered Kids</strong>
+          </p>
+        </div>
+        <div class="sitter col-md-2 d-md-block ml-5 mb-3">
+          <h2 class="text-center heading text-bold">{{ count_sitters }}</h2>
+          <p>
+            <span><i class="bi bi-people total-icon"></i></span
+            ><strong>Registered Sitters</strong>
+          </p>
+        </div>
+        
+        <div class="sitter col-md-2 d-md-block ml-5 mb-3">
+          <h2 class="text-center">UGX. {{ total_payments }}</h2>
+          <p>
+            <span><i class="bi bi-people total-icon"></i></span
+            ><strong>All Payments</strong>
+          </p>
+        </div>
+      </div>
+    </div> <hr>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+            <table id="dataTable" class="table table-stripped sitter-table mt-3 p-3">
+              <caption class="caption-top text-center"><h4>Available Sitters Today</h4></caption>
+              <thead>
+                <tr>
+                  <th>
+                    <b>N</b>ames
+                  </th>
+                  <th>NIN</th>
+                  <th>Location</th>
+                  <th data-type="tel">Contact</th>
+                  <th>More</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                {% for sitter in today_sitters %}
+                  <tr>
+                      <td>{{ sitter.name }}</td>
+                      <td>{{ sitter.NIN }}</td>
+                      <td>{{ sitter.location }}</td>
+                      <td>{{ sitter.contact }}</td>
+                      <td>
+                        <a href="/details/{{ sitter.id }}" class="text-blue-500"> Details </a>
+                      </td>
+                      <td>
+                        <a href="/editsitters/{{ sitter.id }}" class="text-blue-500 text-center"> Edit </a>
+                      </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card border m-3" style="max-width: 15rem; background: #2e53fc;">
+            <div class="card-body text-success">
+              <h1 class="text-center text-light" style="font-size: 4rem; font-weight: 10rem;">{{ all_onduty }}</h1>
+            </div>
+            <div class="card-footer bg-transparent border-secondary"><h3 class="text-center text-light">Sitters on Duty</h3></div>
+          </div>
+          {% comment %} <table id="dataTable" class="table table-stripped">
+            <caption class="caption-top text-center"><h4>Babies Available today</h4></caption>
+            <thead>
+                <tr>
+                  <th>
+                      <b>Baby Names</b>
+                  </th>
+                  <th>Age</th>
+                  <th>Location</th>
+                  <th>Gender</th>
+                  <th>Period of Stay</th>                 
+                  <th>Status</th>
+                  <th>More</th>
+                
+                </tr>
+            </thead>
+            <tbody>
+                 {% for baby in today_babys %} 
+                  <tr>
+                      <td>{{ baby.name }}</td>
+                      <td>{{ baby.age }}</td>
+                      <td>{{ baby.location }}</td>
+                      <td>{{ baby.gender }}</td>
+                      <td>{{ baby.period_of_stay }}</td>                     
+                      <td>
+                          {% if babys.status == False %}
+                              <span class="badge" style="background-color: #a74527;">Out</span>
+                          {% elif babys.status == True %}
+                              <span class="badge" style="background-color: #2e53fc;">In</span>
+                              {% else %}
+                            
+                          {% endif %}
+                      </td>
+                      <td>
+                          <a href="/details/{{ babys.id }}" class="text-blue-500"> Details </a>
+                      </td>
+                      <td>
+                          <a href="/editbabies/{{ baby.id }}" class="text-blue-500"> Edit </a>
+                      </td> 
+                  </tr>
+                {% endfor %} 
+            </tbody>
+        </table>
+        </div> {% endcomment %}
+      </div>
+      
+    </div>
+    </div>
+  </main>
+{% endblock %}

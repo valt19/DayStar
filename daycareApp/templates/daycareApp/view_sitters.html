@@ -1,0 +1,57 @@
+{% extends 'daycareApp/base.html' %} {% load static %} {% block content %}
+
+<main class="main" id="main">
+  <div class="container" id="sitter-details">
+    <h1 class="text-center" style="color: #1e7875;" id="detail">{{ all_sitter.name }}'s Details</h1>
+    <div class="flex gap-2 p-4">
+      <div class="row">
+        <div class="col-md-12">
+          <h5 class="p-1">Name:<span class="p-2" style="color: #a74527">{{ all_sitter.name }}</span></h5>
+          <h5 class="p-1">Sitter Number:<span class="p-2" style="color: #a74527">{{ all_sitter.sitter_number }}</span></h5>
+          <h5 class="p-1">Age:<span class="p-2" style="color: #a74527">{{ all_sitter.age }}</span></h5>
+          <h5 class="p-1">Gender:<span class="p-2" style="color: #a74527">{{ all_sitter.gender }}</span></h5>
+          <h5 class="p-1">Education Level:<span class="p-2" style="color: #a74527">{{ all_sitter.education_Level }}</span></h5>
+          <h5 class="p-1">Phone:<span class="p-2" style="color: #a74527">{{ all_sitter.contact }}</span></h5></h5>
+          <h5 class="p-1">Address:<span class="p-2" style="color: #a74527">{{ all_sitter.location }}</span></h5>
+          <h5 class="p-1">NIN:<span class="p-2" style="color: #a74527">{{ all_sitter.NIN }}</span></h5></h5>
+          <h5 class="p-1">Next of Kin:<span class="p-2" style="color: #a74527">{{ all_sitter.next_of_kin }}</span></h5>
+          <h5 class="p-1">Religion:<span class="p-2" style="color: #a74527">{{ all_sitter.religion }}</span></h5>
+        </div> <br>
+      </div>
+
+      <button type="button" class="btn text-light" style="background-color: #a74527; border: none; color: white;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Delete
+      </button>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-center" id="staticBackdropLabel" style="color: #1e7875;">Confirm Deletion</h5>
+              <span class="bi bi-exclamation-octagon-fill mr-5 float-right" style="color: #a74527; margin-left: 1rem; font-size: 1em;"></span>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <h5 class= "text-center">Are you sure you want to delete the sitter <br> <strong>{{ all_sitter.name }}</strong>?</h5>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn text-light" data-bs-dismiss="modal" style="background-color: #2e53fc; border: none;">Close</button>
+              
+              <a class="btn btn-danger text-white rounded" style="background-color: #a74527; border: none;" href="/delete/{{ all_sitter.id }}"><span><i class="bi bi-trash"></i></span>
+                Delete
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <a class="btn btn-info text-white rounded" style="background-color: #1e7875; border: none;" href="{% url 'edit_sitter' all_sitter.id %}"><span><i class="bi bi-pencil-square"></i></span>
+        Edit
+      </a> 
+    </div>
+  </div>
+</main>
+
+{% endblock %}
+<!-- font-weight=bolder;-->

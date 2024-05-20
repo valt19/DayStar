@@ -1,0 +1,38 @@
+{% extends 'daycareApp/base.html' %} {% load crispy_forms_tags %} {% load static %}
+
+
+{% block content %}
+<main class="main" id="main">
+<div class="container">
+    <!-- Add item Modal -->
+    <button
+    type="button" class="btn btn-lg m-3 text-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+    style="background-color: #1e7875; border: none;"
+    >
+      <span class="bi bi-currency-dollar"> </span>
+    </button>
+     <div class="addform w-50 p-4" style="box-shadow: 0 0 20px 0 rgba(1, 41, 112, 0.15); border-radius: 15px; display: grid; margin: auto;">
+      <form action="" method= 'POST'>
+        {% if alert %}
+            <div class="alert alert-success" role="alert">
+              {{ add_message }}
+            </div>
+            {% elif add_message %}
+              <div class="alert alert-danger" role="alert">
+                {{ add_message }}
+              </div>
+        {% endif %} 
+          <div class="mb-2 form_inner">
+            {% csrf_token %} 
+            {{ addItemForm|crispy }} 
+      
+          </div>
+          <button class="btn btn-primary mr-5" style="background-color: #2e53fc; border: none;">Add New Doll</button>
+      </form>
+        
+     </div>
+    </div>
+  </div>
+</main>
+
+{% endblock content %}

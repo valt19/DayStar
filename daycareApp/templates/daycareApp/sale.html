@@ -1,0 +1,46 @@
+{% extends 'daycareApp/base.html' %} {% load crispy_forms_tags %} {% load static %}
+
+
+{% block content %}
+<main class="main" id="main">
+  <div class="container">
+    <!-- Add item Modal -->
+  
+    <a class="btn btn-lg" href="addstock/" style="background-color: #1e7875; color: white; border: none;"><span class="bi bi-cart4"> </span>Add New Stock</a>
+    <a class="btn btn-lg" href="/salesrecord" style="background-color: #1e7875; color: white; border: none;"><span class="bi bi-cart4"> </span>Sales Record</a>
+  </div>
+
+    <!-- item table -->
+     <div class="col-lg-12 col-md-12 sitter-table mt-3 p-2">
+      <table class="table table-bordered table-stripped mt-3">
+        <caption class="caption-top text-center" style="color: #a74527;"><h4>Items in Stock
+        </h4></caption>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Doll Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for items in item %}
+            <tr>
+              <th scope="row">{{ items.id }}</th>
+              <td>{{ items.doll_name }}</td>
+              <td>{{ items.quantity }}</td>
+              <td>{{ items.price }}</td>
+              <td><a href="{% url 'addmore' id=items.id %}" class="btn btn-sm m-1 text-white" style="background-color: #1e7875; border: none;">Add More</a><span>|</span><a href="{% url 'selling' pk=items.id %}" class="btn btn-sm text-white m-1" style="background-color: #a74527; border: none;">Sell</a>
+                
+              </td>
+              
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table> 
+    </div>
+  </div>
+</main>
+
+{% endblock content %}
